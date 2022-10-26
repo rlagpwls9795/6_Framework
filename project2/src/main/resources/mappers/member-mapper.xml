@@ -33,11 +33,6 @@
   	</resultMap>
   
   
-  <!-- 속성
-  	parameterType : SQL 호출 시 전달 받은 매개변수의 자료형 (자료형은 패키지명+클래스명 또는 별칭)
-  																								ex) java.lang.String ==> string
-  
-   -->
    
    <!-- ** 마이바티스에서 SQL에 전달 받은 값을 추가하는 방법 **
    		#{value} : 위치홀더(?)의 역할 + pstmt.set자료형()
@@ -52,6 +47,13 @@
    				-> SELECT MEMBER_EMAIL FROM "MEMBER";
     --> 
   
+  <!-- 속성
+  	parameterType : SQL 호출 시 전달 받은 매개변수의 자료형 (자료형은 패키지명+클래스명 또는 별칭)
+  																								ex) java.lang.String ==> string
+   -->
+   
+  <!-- insert / update / delete 
+  		 항상 반영된 행의 개수(int type)이 반환되기 때문에 변도의 resultType 지정이 필요 없다 -->
   
   <!-- 로그인 -->																<!-- resultMap의 id -->
   <select id="login" parameterType="string" resultMap="member_rm">
@@ -61,6 +63,13 @@
 		WHERE MEMBER_DEL_FL = 'N'
 		AND MEMBER_EMAIL = #{memberEmail}
   </select>
+  
+  <!-- 회원 가입 -->
+  <insert id="signUp" parameterType="Member">
+  	INSERT INTO "MEMBER" 
+		VALUES(SEQ_MEMBER_NO.NEXTVAL, #{memberEmail}, #{memberPw}, #{memberNickname}, #{memberTel}, #{memberAddress},
+					 DEFAULT, DEFAULT, DEFAULT, DEFAULT)
+  </insert>
   
   
 </mapper>
