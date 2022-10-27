@@ -308,22 +308,3 @@ public class MemberController {
 	}
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
