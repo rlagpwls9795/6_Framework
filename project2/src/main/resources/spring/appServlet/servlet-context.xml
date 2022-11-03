@@ -31,6 +31,8 @@
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<!-- /webapp/resources 폴더 경로를 web에서 요청했을 때 접근 가능하게 하는 태그 -->
 	<resources mapping="/resources/**" location="/resources/" />
+	<!-- favicon 추가 -->
+	<resources mapping="/favicon.ico" location="/resources/images/favicon.ico" />
 
 	<!-- View Resolver 객체(bean) 생성 구문 -->
 	<!-- 

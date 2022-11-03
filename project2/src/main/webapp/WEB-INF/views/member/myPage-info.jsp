@@ -91,5 +91,7 @@
         }
     </script>
 
+    <script src="/resources/js/member/myPage.js"></script>
+
 </body>
 </html>
