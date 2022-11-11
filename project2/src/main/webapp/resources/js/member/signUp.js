@@ -67,10 +67,6 @@ memberEmail.addEventListener("input", function(){
     // 정규 표현식을 이용한 유효성 검사
     const regEx = /^[A-Za-z\d\-\_]{4,}@[가-힣\w\-\_]+(\.\w+){1,3}$/;
     if(regEx.test(memberEmail.value)){
-        // emailMessage.innerText="유효한 이메일 형식입니다.";
-        // emailMessage.classList.add("confirm");
-        // emailMessage.classList.remove("error");
-        // checkObj.memberEmail = true;
 
         // 이메일이 유효한 형식이라면 중복되는 이메일이 있는지 검사
         // -> AJAX 이용
@@ -219,16 +215,44 @@ memberNickname.addEventListener("input",function(){
         return;
     }
 
-    const regEx = /^[A-Za-x가-힣\d]{2,10}$/;
+    const regEx = /^[A-Za-z가-힣\d]{2,10}$/;
 
     if(regEx.test(memberNickname.value)){
 
         // ** 닉네임 중복검사 코드 추가 예정 **
+        const param = {"memberNickname" : memberNickname.value}
 
-        nicknameMessage.innerText="유효한 닉네임 형식입니다.";
-        nicknameMessage.classList.add("confirm");
-        nicknameMessage.classList.remove("error");
-        checkObj.memberNickname=true;
+        $.ajax({
+            url : '/nicknameDupCheck',
+            data : param,
+            // type : 'GET', // type 미작성 시 기본값 GET
+            success : (res) => {
+                    // 매개변수 res == 서버 비동기 통신 응답 데이터
+
+                if(res==0){
+                    nicknameMessage.innerText="사용 가능한 닉네임 입니다.";
+                    nicknameMessage.classList.add("confirm");
+                    nicknameMessage.classList.remove("error");
+                    checkObj.memberNickname=true;
+                } else {
+                    nicknameMessage.innerText="이미 사용중인 닉네임 입니다.";
+                    nicknameMessage.classList.remove("confirm");
+                    nicknameMessage.classList.add("error");
+                    checkObj.memberNickname=false;
+                }
+            },
+            error : () => {
+                console.log("닉네임 중복 검사 실패");
+            },
+            complete : tempFn 
+                        // function tempFn(){
+                        //      console.log("닉네임 검사 완료");
+                        // } ==> 함수 이름만 적으면 안에 내용이 출력
+
+        });
+
+
+
     } else{
         nicknameMessage.innerText="유효하지 않은 닉네임 형식입니다.";
         nicknameMessage.classList.remove("confirm");
@@ -238,6 +262,10 @@ memberNickname.addEventListener("input",function(){
 
 
 });
+
+function tempFn(){
+    console.log("닉네임 검사 완료");
+}
 
 
 // 전화번호 유효성 검사

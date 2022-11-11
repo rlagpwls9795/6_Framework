@@ -376,3 +376,21 @@ label[for='header-menu-toggle']:hover {
     margin: 0;
     color: gray;
 }
+
+
+/* main content */
+#content-1-2 {
+    width: 450px;
+    border: solid 1px black;
+    margin: 50px auto;
+}
+
+.secession{
+    background-color: rosybrown;
+}
+.secession>td:first-of-type {
+    text-decoration: line-through;
+}
+
+
+
