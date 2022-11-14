@@ -55,7 +55,18 @@
                     name="myPage-frm" enctype="multipart/form-data">
 
                     <div class="profile-image-area">
-                        <img id="profile-image" src="/resources/images/user.png">
+                        
+                        <c:if test="${empty loginMember.profileImage}">
+
+                            <img id="profile-image" src="/resources/images/user.png">
+
+                        </c:if>
+                        <c:if test="${not empty loginMember.profileImage}">
+
+                            <img id="profile-image" src="${loginMember.profileImage}">
+
+                        </c:if>
+
                     </div>
                     <span id="delete-image">&times;</span>
 
