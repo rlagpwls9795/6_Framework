@@ -117,21 +117,27 @@
                     
 					<%-- 로그인 O인 경우 --%>
                     <c:otherwise>
-                    	<article class="login-area">
-                    		<!-- 회원 프로필 이미지 -->
-                    		<a href="/member/myPage/profile"><img id="member-profile" src="/resources/images/user.png"></a>
-                    		<!-- 회원 정보 + 로그아웃 -->
-                    		<div class="my-info">
-                    			<div>
-                    				<a href="/member/myPage/info" id="nickname">${loginMember.memberNickname}</a>
-                    				<a href="/member/logout" id="logout-btn">로그아웃</a>  <!-- 세션 무효화 -->
-                    			</div>
-                    			<p>${loginMember.memberEmail}</p>
-                    		</div>
-                    	</article>
+                        <article class="login-area">
+                            <!-- 회원 프로필 이미지 -->
+                            <a href="/member/myPage/profile">
+                                <c:if test="${empty loginMember.profileImage}">
+                                    <img id="member-profile" src="/resources/images/user.png">
+                                </c:if>
+                                <c:if test="${not empty loginMember.profileImage}">
+                                    <img id="member-profile" src="${loginMember.profileImage}">
+                                </c:if>
+                            </a>
+                            <!-- 회원 정보 + 로그아웃 -->
+                            <div class="my-info">
+                                <div>
+                                    <a href="/member/myPage/info" id="nickname">${loginMember.memberNickname}</a>
+                                    <a href="/member/logout" id="logout-btn">로그아웃</a>  <!-- 세션 무효화 -->
+                                </div>
+                                <p>${loginMember.memberEmail}</p>
+                            </div>
+                        </article>
                     </c:otherwise>
                 </c:choose>
-            	
             </section>
         </section>
     </main>

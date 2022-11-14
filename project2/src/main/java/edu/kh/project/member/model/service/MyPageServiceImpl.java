@@ -77,7 +77,7 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 	// 프로필 이미지 수정
-	@Transactional
+	@Transactional(rollbackFor = Exception.class) //예외가 발생하면 롤백
 	@Override
 	public int updateProfile(String webPath, String filePath, MultipartFile profileImage, Member loginMember)
 			throws Exception {
@@ -101,7 +101,8 @@ public class MyPageServiceImpl implements MyPageService {
 		}
 
 		int result = dao.updateProfile(loginMember); // 0 또는 1
-
+		
+	
 		if (result > 0) { // DB 수정 성공 시 -> 실제로 서버에 파일 저장
 
 			if (rename != null) {
@@ -115,6 +116,7 @@ public class MyPageServiceImpl implements MyPageService {
 		} else {
 			// 실패 시 다시 이전 이미지를 세팅
 			loginMember.setProfileImage(temp);
+			throw new Exception("파일 업로드 실패");
 		}
 
 		return result; // 결과 반환
