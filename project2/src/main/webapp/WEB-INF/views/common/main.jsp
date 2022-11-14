@@ -119,7 +119,7 @@
                     <c:otherwise>
                     	<article class="login-area">
                     		<!-- 회원 프로필 이미지 -->
-                    		<a href="#"><img id="member-profile" src="/resources/images/user.png"></a>
+                    		<a href="/member/myPage/profile"><img id="member-profile" src="/resources/images/user.png"></a>
                     		<!-- 회원 정보 + 로그아웃 -->
                     		<div class="my-info">
                     			<div>
