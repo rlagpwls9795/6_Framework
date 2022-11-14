@@ -25,7 +25,7 @@
                 <div class="signUp-input-area">
                     <input type="text" name="memberEmail" id="memberEmail" placeholder="아이디(이메일)" 
                         maxlength="50" autocomplete="off" required value="${tempMember.memberEmail}">
-                    <button type="button">인증번호 받기</button>
+                    <button id="sendAuthKeyBtn" type="button">인증번호 받기</button>
                 </div>
                 <span class="signUp-message" id="emailMessage">메일을 받을 수 있는 이메일을 입력해주세요.</span>
 
@@ -34,10 +34,10 @@
                     <span class="required">*</span> 인증번호                  
                 </label>
                 <div class="signUp-input-area">
-                    <input type="text" name="emailCheck" id="emailCheck" placeholder="인증번호 입력" maxlength="6" autocomplete="off" required>
-                    <button type="button">인증하기</button>
+                    <input type="text" name="authKey" id="authKey" placeholder="인증번호 입력" maxlength="6" autocomplete="off" required>
+                    <button id="checkAuthKeyBtn" type="button">인증하기</button>
                 </div>
-                <span class="signUp-message confirm">인증되었습니다.</span> <!-- 인증번호가 일치하지 않습니다. -->
+                <span id="authKeyMessage" class="signUp-message"></span>
                 
                 <!-- 비밀번호 입력 -->
                 <label for="memberPw">
