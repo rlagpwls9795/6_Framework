@@ -386,6 +386,10 @@ label[for='header-menu-toggle']:hover {
     margin: 50px auto;
 }
 
+#tbody td:first-child{
+    width: 200px;
+}
+
 .secession{
     background-color: rosybrown;
 }
