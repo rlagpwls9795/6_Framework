@@ -12,6 +12,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import edu.kh.project.email.model.service.EmailService;
 
+
 @Controller
 @RequestMapping("/sendEmail")
 @SessionAttributes("authKey")

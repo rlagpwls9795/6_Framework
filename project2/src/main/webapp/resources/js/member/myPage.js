@@ -85,7 +85,7 @@ function alertAndFocus(input, str) {
 //      정말 탈퇴를 진행할 것인지 확인하는 confirm 출력
 //      (확인 클릭 -> 탈퇴 /  취소 -> 탈퇴 취소)
 
-/*
+
 const memberDeleteForm = document.getElementById("memberDeleteForm");
 if( memberDeleteForm != null ){ // 탈퇴 폼이 있을 경우
 
@@ -122,38 +122,39 @@ if( memberDeleteForm != null ){ // 탈퇴 폼이 있을 경우
         }
 
     });
-}*/
+} 
+
 
 // 인라인 이벤트 모델로 탈퇴처리
-function memberDeleteValidate() {
+// function memberDeleteValidate() {
 
-    // 비밀번호 입력 검사
-    const memberPw = document.getElementById("memberPw");
+//     // 비밀번호 입력 검사
+//     const memberPw = document.getElementById("memberPw");
 
-    if (memberPw.value.trim().length == 0) {
-        alert("비밀번호를 입력해주세요.")
-        memberPw.focus();
-        memberPw.value = "";
-        return false;
-    }
+//     if (memberPw.value.trim().length == 0) {
+//         alert("비밀번호를 입력해주세요.")
+//         memberPw.focus();
+//         memberPw.value = "";
+//         return false;
+//     }
 
-    // 체크 여부 검사
-    const agree = document.getElementById("agree");
+//     // 체크 여부 검사
+//     const agree = document.getElementById("agree");
 
-    if (!agree.checked) {
-        alert("탈퇴 동의하시면 체크를 눌러주세요.")
-        agree.focus();
-        return false;
-    }
+//     if (!agree.checked) {
+//         alert("탈퇴 동의하시면 체크를 눌러주세요.")
+//         agree.focus();
+//         return false;
+//     }
 
-    // 탈퇴 여부 확인
-    if (!confirm("정말로 탈퇴 하시겠습니까?")) {
-        alert("탈퇴 취소");
-        return false;
-    }
+//     // 탈퇴 여부 확인
+//     if (!confirm("정말로 탈퇴 하시겠습니까?")) {
+//         alert("탈퇴 취소");
+//         return false;
+//     }
 
-    return true;
-}
+//     return true;
+// }
 
 
 // ----------------------------------------------------------------------------------------
