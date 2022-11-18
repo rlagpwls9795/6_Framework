@@ -56,6 +56,16 @@ public class BoardDAO {
 														  // 파라미터(없는 경우 null), RowBounds 객체
 		return sqlSession.selectList("boardMapper.selectBoardList", boardCode, rowBounds);
 	}
+
+
+
+	/** 게시글 상세 조회 + 이미지 목록 조회 + 댓글 목록 조회
+	 * @param boardNo
+	 * @return board
+	 */
+	public Board selectBoardDetail(int boardNo) {
+		return sqlSession.selectOne("boardMapper.selectBoardDetail", boardNo);
+	}
 	
 	
 	

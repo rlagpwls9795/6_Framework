@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import edu.kh.project.board.model.service.BoardService;
+import edu.kh.project.board.model.vo.Board;
 import lombok.Getter;
 
 @Controller
@@ -43,9 +44,47 @@ public class BoardController {
 		
 		model.addAttribute("map", map); // request scope 세팅
 		
-		return "board/boardList";
+		return "board/boardList"; // forward (request scope 유지)
 	}
+	
+	
+	// 게시글 상세 조회
+	@GetMapping("/board/{boardCode}/{boardNo}")
+	public String boardDetail(@PathVariable("boardNo") int boardNo,
+								@PathVariable("boardCode") int boardCode, Model model ) {
+		
+		// 게시글 상세 조회 서비스 호출
+		Board board = service.selectBoardDetail(boardNo);
+		// + 좋아요 수, 좋아요 여부
+		// + 조회수 증가(쿠키를 이용해서 해당 IP당 하루 한 번)
+		
+		model.addAttribute("board", board);
+		
+		return "board/boardDetail";
+	}
+	
+	
+	
+	
+	
 	
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
    
