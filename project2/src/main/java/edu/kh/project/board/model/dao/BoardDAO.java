@@ -22,7 +22,7 @@ public class BoardDAO {
 	/** 게시판 이름 목록 조회
 	 * @return boardTypeList
 	 */
-	public List<Map<String, Object>> selectBordType() {
+	public List<Map<String, Object>> selectBoardType() {
 		return sqlSession.selectList("boardMapper.selectBoardType");
 	}
 

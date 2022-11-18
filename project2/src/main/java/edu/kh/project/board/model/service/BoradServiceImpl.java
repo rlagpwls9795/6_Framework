@@ -22,7 +22,7 @@ public class BoradServiceImpl implements BoardService{
 	// 게시판 이름 목록 조회
 	@Override
 	public List<Map<String, Object>> selectBoardType() {
-		return dao.selectBordType();
+		return dao.selectBoardType();
 	}
 
 
