@@ -60,9 +60,9 @@
 											<c:if test="${not empty board.thumbnail}">
 												<img class="list-thumbnail" src="${board.thumbnail}"> 
 											</c:if>
-											<%-- /board/1/1500 --%>
-											<%-- /board/{boardCode}/{boardNo} --%>
-											<a href="/board/${boardCode}/${board.boardNo}">${board.boardTitle}</a> [${board.commentCount}]
+											<%-- /board/1/1500?cp=1 --%>
+											<%-- /board/{boardCode}/{boardNo}?cp={pagination.currentPage} --%>
+											<a href="/board/${boardCode}/${board.boardNo}?cp=${pagination.currentPage}">${board.boardTitle}</a> [${board.commentCount}]
 										</td>
 										<td>${board.memberNickname}</td>
 										<td>${board.boardCreateDate}</td>

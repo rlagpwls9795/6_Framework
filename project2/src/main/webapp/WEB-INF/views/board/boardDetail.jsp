@@ -42,6 +42,25 @@
 
                     <span>${board.memberNickname}</span>
 
+                    <!-- 좋아요 -->
+                    <span class="like-area">
+
+                        <!-- likeCheck가 없다면 == 로그인 X 또는 좋아요 X -->
+                        <c:if test="${empty likeCheck}">
+                            <!-- 빈 하트 -->
+                            <i class="fa-regular fa-heart" id="boardLike"></i>
+                        </c:if>
+
+                        <!-- likeCheck가 있다면 == 로그인 O, 좋아요 O -->
+                        <c:if test="${not empty likeCheck}">
+                            <!-- 찬 하트 -->
+                            <i class="fa-solid fa-heart" id="boardLike"></i>
+                        </c:if>
+                        
+                        <!-- 좋아요 수 -->
+                        <span>${board.likeCount}</span>
+                    </span>
+
                 </div>
 
                 <div class="board-info">
@@ -53,7 +72,7 @@
                     </c:if>
 
 
-                    <p> <span>조회수</span>  ${board.commentCount} </p>                    
+                    <p> <span>조회수</span>  ${board.readCount} </p>                    
                 </div>
             </div>
 
@@ -113,10 +132,11 @@
             <div class="board-btn-area">
 
                 <!-- 로그인한 회원과 게시글 작성자 번호가 같은 경우-->
-                <button id="updateBtn">수정</button>
-                <button id="deleteBtn">삭제</button>
-
-
+                <c:if test="${board.memberNo==loginMember.memberNo}">
+	                <button id="updateBtn">수정</button>
+	                <button id="deleteBtn">삭제</button>
+                </c:if>
+               
                 <button id="goToListBtn">목록으로</button>
             </div>
 
@@ -127,8 +147,30 @@
         <jsp:include page="comment.jsp"/>
     </main>
 
+    <!-- JSP 내장 객체의 세팅 값을 JS에서 얻어가는 방법 1 -->
+    <!-- 화면에 숨겨 놓고 JS를 이용해서 값을 얻어 가는 방법 -->
+    <!-- <input type="hidden" name="memberNo" value="${loginMember.memberNo}"> -->
+    
+
+    <!-- JSP 내장 객체의 세팅 값을 JS에서 얻어가는 방법 2 -->
+    <!-- script 태그를 이용해서 전역변수로 선언하는 방법 -->
+    <script>
+        // 로그인한 회원번호 얻어오기
+
+        //(참고) JSP 해석 순서 : EL/JSTL > HTML > JS
+        // *** JS에 EL/JSTL 사용 시 양 쪽에 "" 또는 ''를 붙이는 것을 권장 ***
+        // => 값이 없어서 공백이 되더라도 빈문자열로 인식하여 에러 발생을 막음
+        const memberNo = "${loginMember.memberNo}";
+        const boardNo = "${boardNo}";
+    </script>
+
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 
+    <!-- JQuery 라이브러리(.js) 추가 (CDN 방식)-->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" 
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" 
+        crossorigin="anonymous"></script>
+    <script src="/resources/js/board/board.js"></script>
 
 </body>
 </html>

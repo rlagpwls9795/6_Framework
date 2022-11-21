@@ -55,5 +55,33 @@ public class BoradServiceImpl implements BoardService{
 	}
 	
 	
+	// 조회 수 증가
+	@Override
+	public int updateReadCount(int boardNo) {
+		return dao.updateReadCount(boardNo);
+	}
+	
+	
+	// 좋아요 여부 체크
+	@Override
+	public int boardLikeCheck(Map<String, Object> map) {
+		return dao.boardLikeCheck(map);
+	}
+	
+	
+	// 좋아요 수 증가
+	@Override
+	public int boardLikeUp(Map<String, Object> paramMap) {
+		return dao.boardLikeUp(paramMap);
+	}
+
+	// 좋아요 수 감소
+	@Override
+	public int boardLikeDown(Map<String, Object> paramMap) {
+		return dao.boardLikeDown(paramMap);
+	}
+	
+	
+	
 
 }
