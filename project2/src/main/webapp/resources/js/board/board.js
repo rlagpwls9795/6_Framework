@@ -98,6 +98,9 @@ deleteBtn.addEventListener("click",()=>{
 const updateBtn = document.getElementById("updateBtn");
 updateBtn.addEventListener("click",()=>{
     
+    // /board/{boardCode}/{boardNo}/update?cp=10
+    location.href=location.pathname+"/update"+location.search;
+    
 });
 
 

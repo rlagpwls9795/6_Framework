@@ -143,6 +143,27 @@ public class BoardDAO {
 	public int insertBoardImageList(List<BoardImage> boardImageList) {
 		return sqlSession.insert("boardMapper.insertBoardImageList",boardImageList);
 	}
+
+
+
+	/** 게시글 수정
+	 * @param board
+	 * @return result
+	 */
+	public int boardUpdate(Board board) {
+		return sqlSession.update("boardMapper.boardUpdate", board);
+	}
+
+
+
+	/** 게시글 이미지 삭제
+	 * @param condition
+	 * @return result
+	 */
+	public int boardImageDelete(String condition) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("boardMapper.boardImageDelete", condition);
+	}
 	
 	
 	

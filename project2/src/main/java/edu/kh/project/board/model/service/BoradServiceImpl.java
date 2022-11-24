@@ -182,5 +182,69 @@ public class BoradServiceImpl implements BoardService{
 	}
 	
 	
+	// 게시글 수정
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int boardUpdate(Board board, List<MultipartFile> imageList, String webPath, String folderPath,
+			String deleteList) throws Exception {
+		
+		// 1. 게시글 부분만 수정
+		// 1-1) XSS 방지, 개행문자 처리
+		board.setBoardTitle(Util.XSSHandling(board.getBoardTitle()));
+		board.setBoardContent(Util.XSSHandling(board.getBoardContent()));
+		board.setBoardContent(Util.newLineHandling(board.getBoardContent()));
+		
+		// 1-2) DAO 호출
+		int result = dao.boardUpdate(board);
+		
+		// 2. 이미지 수정
+		if(result>0) { // 게시글 수정이 성공한 후
+			
+			// 1) 삭제된 이미지가 있을 경우 삭제 진행
+			if(!deleteList.equals("")) {
+				
+				// deleteList : "1,2,3"
+				String condition = "WHERE BOARD_NO="+board.getBoardNo()+" AND IMG_ORDER IN("+deleteList+")";
+				
+				// DAO 호출
+				result=dao.boardImageDelete(condition);
+				
+			}
+		}
+		
+		
+		
+		
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

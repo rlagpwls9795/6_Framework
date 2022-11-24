@@ -58,13 +58,25 @@ public interface BoardService {
 	 */
 	int boardDelete(int boardNo);
 
-	/** 게시글 작성
+	/**
 	 * @param board
 	 * @param imageList
 	 * @param webPath
 	 * @param folderPath
 	 * @return boardNo
+	 * @throws IOException
 	 */
 	int boardWrite(Board board, List<MultipartFile> imageList, String webPath, String folderPath) throws IOException;
+
+	/**
+	 * @param board
+	 * @param imageList
+	 * @param webPath
+	 * @param folderPath
+	 * @param deleteList
+	 * @return result
+	 * @throws Exception
+	 */
+	int boardUpdate(Board board, List<MultipartFile> imageList, String webPath, String folderPath, String deleteList) throws Exception;
 
 }
