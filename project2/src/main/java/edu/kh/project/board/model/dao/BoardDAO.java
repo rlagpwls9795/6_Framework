@@ -161,8 +161,27 @@ public class BoardDAO {
 	 * @return result
 	 */
 	public int boardImageDelete(String condition) {
-		// TODO Auto-generated method stub
 		return sqlSession.delete("boardMapper.boardImageDelete", condition);
+	}
+
+
+
+	/** 이미지 수정
+	 * @param img
+	 * @return result
+	 */
+	public int boardImageUpdate(BoardImage img) {
+		return sqlSession.update("boardMapper.boardImageUpdate", img);
+	}
+
+
+
+	/** 이미지 삽입
+	 * @param img
+	 * @return result
+	 */
+	public int boardImageInsert(BoardImage img) {
+		return sqlSession.insert("boardMapper.boardImageInsert", img);
 	}
 	
 	
