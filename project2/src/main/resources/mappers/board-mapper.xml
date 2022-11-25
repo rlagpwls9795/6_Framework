@@ -104,7 +104,8 @@
 		   END B_CREATE_DATE,
 		   ]]>
 			(SELECT COUNT(*) FROM "COMMENT" C
-			 WHERE C.BOARD_NO = B.BOARD_NO) COMMENT_COUNT,
+			 WHERE C.BOARD_NO = B.BOARD_NO
+			 AND COMMENT_DEL_FL='N') COMMENT_COUNT,
 			(SELECT COUNT(*) FROM BOARD_LIKE L
 			 WHERE L.BOARD_NO = B.BOARD_NO) LIKE_COUNT,
 			(SELECT IMG_PATH || IMG_RENAME FROM BOARD_IMG I
@@ -251,7 +252,8 @@
 	<update id="boardUpdate" parameterType="Board">
 		UPDATE BOARD SET
 		BOARD_TITLE = #{boardTitle},
-		BOARD_CONTENT = #{boardContent}
+		BOARD_CONTENT = #{boardContent},
+		B_UPDATE_DATE = SYSDATE
 		WHERE BOARD_NO = #{boardNo}
 	</update>
 	
