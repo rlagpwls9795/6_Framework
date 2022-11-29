@@ -205,7 +205,6 @@ public class BoradServiceImpl implements BoardService {
 				}
 
 			}
-			
 
 			// 2) imageList에서 실제 업로드된 파일을 찾아 분류 작업
 			// imageList : 실제 파일이 담겨있는 리스트
@@ -240,40 +239,65 @@ public class BoradServiceImpl implements BoardService {
 
 					// boardImageList에 추가
 					boardImageList.add(img);
-					
+
 					// 새로 업로드된 이미지 정보를 이용해서 DB 정보 수정
 					// -> 새로운 이미지가 기존에 존재했는데 수정한 것인지 없었는데 추가한 것인지 현재는 알 수 없음
-					// --> IMG_ORDER를 이용해 수정 
-					// ---> 만약 BOARD_IMG 테이블에 IMG_ORDER가 일치하는 행이 없다면 수정 실패 ==> 0 반환 (기존 X새로운 이미지) 
-					//                                                            ==> insert 필요
+					// --> IMG_ORDER를 이용해 수정
+					// ---> 만약 BOARD_IMG 테이블에 IMG_ORDER가 일치하는 행이 없다면 수정 실패 ==> 0 반환 (기존 X새로운 이미지)
+					// ==> insert 필요
 					result = dao.boardImageUpdate(img); // 일단 업데이트
-					
-					if(result ==0) { //기존에 없던 새로운 이미지 추가
+
+					if (result == 0) { // 기존에 없던 새로운 이미지 추가
 						result = dao.boardImageInsert(img);
-						
-						if(result==0) { // 이미지 삽입 실패
+
+						if (result == 0) { // 이미지 삽입 실패
 							throw new BoardUpdateException("이미지 수정/삽입 예외");
 						}
 					}
-					
-					
-				} 
-				
-			} 
-			
+
+				}
+
+			}
+
 			// 분류 작업 결과물 (boardImageList, reNameList)을 이용해서 파일을 서버에 저장
-			if(!boardImageList.isEmpty()) {
+			if (!boardImageList.isEmpty()) {
 				// 서버에 이미지 저장
-				for(int i=0;i<boardImageList.size();i++) {
-					int index=boardImageList.get(i).getImageOrder();
-					
-					imageList.get(index).transferTo(new File(folderPath+reNameList.get(i)));
+				for (int i = 0; i < boardImageList.size(); i++) {
+					int index = boardImageList.get(i).getImageOrder();
+
+					imageList.get(index).transferTo(new File(folderPath + reNameList.get(i)));
 				}
 			}
-			
+
 		}
 
 		return result;
+	}
+
+	// 검색 목록 조회
+	@Override
+	public Map<String, Object> selectBoardList(Map<String, Object> pm, int cp) {
+		
+		// 1. 검색 조건이 일치하는 전체 게시글 수 조회 (단, 삭제 제외)
+		int listCount = dao.getListCount(pm);
+
+		// 2. 검색 조건이 일치하는 게시글 수 + cp(현재 페이지)를 이용해서 페이징 처리 객체 생성
+		Pagination pagination = new Pagination(listCount, cp);
+
+		// 3. 페이징 처리 객체를 이용해서 검색 조건이 일치하는 게시글 목록 조회
+		List<Board> boardList = dao.selectBoardList(pagination, pm);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pagination", pagination);
+		map.put("boardList", boardList);
+
+		return map;
+	}
+	
+	// 이미지 목록 조회
+	@Override
+	public List<String> selectImageList() {
+		return dao.selectImageList();
 	}
 
 }
